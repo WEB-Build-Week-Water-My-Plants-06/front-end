@@ -27,7 +27,7 @@ With an easy to use interface for creating a plant watering schedule tailored to
 1. Clone this repository.
 
 ```jsx
-git clone git@github.com:Build-Week-Water-My-Plants-8/front-end.git
+git clone git@github.com:WEB-Build-Week-Water-My-Plants-06/front-end.git
 ```
 
 1. To install all the dependencies; React, Reactstrap, React-Router-DOM, Bootstrap, React-DOM, and React-Router.
