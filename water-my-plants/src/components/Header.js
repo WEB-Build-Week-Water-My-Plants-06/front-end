@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-function Header() {
+
+export default function Header() {
   return (
     <header>
       <h2>Water My Plants</h2>
@@ -12,5 +13,3 @@ function Header() {
     </header>
   )
 }
-
-export default Header;
