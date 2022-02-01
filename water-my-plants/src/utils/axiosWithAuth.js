@@ -7,5 +7,6 @@ export default function axiosWithAuth() {
     headers: {
       authorization: token
     },
+    baseURL: 'https://water-my-plants-8.herokuapp.com/api'
   })
 }
