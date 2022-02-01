@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import signUpSchema from '../validation/signUpSchema';
 
@@ -18,10 +20,22 @@ const initialFormErrors = {
 export default function SignUp () {
   const [formValues, setFormValues] = useState (initialFormValues);
   const [formErrors, setFormErrors] = useState (initialFormErrors);
+  const { push } = useHistory();
 
   const signup = () => {
-
-  };
+    axiosWithAuth().post('/users/register', {
+      "username": formValues.username,
+      "password": formValues.password,
+      "phone_number": formValues.phone_number
+    })
+    .then(res => {
+      console.log(res);
+      push('/login');
+    })
+    .catch(err => {
+      console.log({err});
+    })
+  }
 
   const validate = (name, value) => {
     yup

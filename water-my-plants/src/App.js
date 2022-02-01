@@ -9,6 +9,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/Logout';
+import MyPlantList from './components/MyPlantList';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Login />
         <Footer />
         <SignUp />
+        <MyPlantList />
 
       <Switch>
         <PrivateRoute exact path='/logout' component={Logout}/>

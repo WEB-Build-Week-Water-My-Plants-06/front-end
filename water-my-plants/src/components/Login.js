@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialFormValues = {
   username: '',
@@ -7,10 +10,30 @@ const initialFormValues = {
 };
 
 export default function Login (props) {
+  const {setIsLoggedIn} = props;
   const [formValues, setFormValues] = useState(initialFormValues);
+  const { push } = useHistory();
 
   const login = () => {
+    axios
+      .post ('https://water-my-plants-8.herokuapp.com/api/users/login', {
+        username: formValues.username,
+        password: formValues.password,
+        phone_number: formValues.phone_number,
+      })
+      .then (res => {
+        localStorage.setItem ('username', formValues.username);
+        localStorage.setItem ('token', res.data.token);
+        setIsLoggedIn (true);
+        push('/plants');
 
+        axiosWithAuth ()
+          .get ('/users')
+          .then (res => {
+            localStorage.setItem ('id', res.data.user_id);
+            localStorage.setItem ('phone_number', res.data.phone_number);
+          });
+      });
   };
 
   const onChange = e => {
@@ -18,21 +41,23 @@ export default function Login (props) {
       ...formValues,
       [e.target.name]: e.target.value,
     });
+    console.log (e.target.name, e.target.value);
   };
 
   const onSubmit = e => {
     e.preventDefault ();
-    login();
+    login (formValues);
   };
 
   return (
     <form className="form-container login-form" onSubmit={onSubmit}>
+
       <div className="form-title">
         <h1>Login</h1>
       </div>
       <div className="formGroup">
         <div className="username-input form-spacing">
-          <label>Username:&nbsp;</label>
+          <label>Email/Username:&nbsp;</label>
             <input
               name="username"
               type="text"
