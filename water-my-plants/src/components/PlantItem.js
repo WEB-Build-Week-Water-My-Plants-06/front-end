@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import EditPlantForm from './EditPlantForm';
 
-export default function PlantItem (props) {
-  const {plant, handleDelete, handleUpdatePlant} = props;
-
-  const [formToggle, setFormToggle] = useState (false);
+export default function PlantItem(props) {
+  const { plant, handleDelete, handleUpdatePlant } = props;
+  const [formToggle, setFormToggle] = useState(false);
 
   return (
     <div className="plant-item-container">
@@ -22,14 +21,14 @@ export default function PlantItem (props) {
           <button
             className="edit"
             onClick={() => {
-              setFormToggle (!formToggle);
+              setFormToggle(!formToggle);
             }}
           >
             edit
           </button>
           <button
             className="remove"
-            onClick={() => handleDelete (plant.plant_id)}
+            onClick={() => handleDelete(plant.plant_id)}
           >
             remove
           </button>

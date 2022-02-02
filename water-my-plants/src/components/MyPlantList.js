@@ -1,55 +1,53 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import PlantItem from './PlantItem';
 
 export default function MyPlantList() {
-  const [plantList, setPlantList] = useState ([]);
+  const [plantList, setPlantList] = useState([]);
 
-  useEffect (() => {
-    axiosWithAuth ()
-      .get ('/plants')
-      .then (resp => {
-        setPlantList (resp.data);
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/plants')
+      .then(resp => {
+        setPlantList(resp.data);
       })
-      .catch (err => {
-        console.log ({err});
+      .catch(err => {
+        console.log(err);
       });
   }, []);
 
   const handleDelete = id => {
     axiosWithAuth()
       .delete(`/plants/${id}`)
-      .then (resp => {
-        const deletedPlant = plantList.filter (plant => plant.plant_id !== id);
-        setPlantList (deletedPlant);
+      .then(resp => {
+        const deletedPlant = plantList.filter(plant => plant.plant_id !== id);
+        setPlantList(deletedPlant);
       })
-      .catch (err => {
-        console.error ({err});
+      .catch(err => {
+        console.error(err);
       });
   };
 
   const handleUpdatePlant = newPlant => {
-    console.log (newPlant);
     axiosWithAuth()
       .put(`/plants/${newPlant.plant_id}`, newPlant)
-      .then (resp => {
-        setPlantList (
+      .then(resp => {
+        setPlantList(
           plantList
-            .filter (plant => plant.plant_id !== newPlant.plant_id)
-            .concat ([resp.data])
+            .filter(plant => plant.plant_id !== newPlant.plant_id)
+            .concat([resp.data])
         );
-        console.log (plantList);
       })
-      .catch (err => {
-        console.error ({err});
+      .catch(err => {
+        console.error(err);
       });
   };
 
-  return (
+  return(
     <div className="plantList-container">
       <h1 id="my-plants">My Plants</h1>
       <div className="list-container">
-        {plantList.map ((plant, i) => {
+        {plantList.map((plant, i) => {
           return (
             <PlantItem
               plant={plant}
@@ -67,7 +65,6 @@ export default function MyPlantList() {
           </a>
         </div>
       </div>
-
     </div>
   );
 };

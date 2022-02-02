@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Footer() {
+export default function Footer() {
   return (
-    <div>
-      Footer
-    </div>
-  )
-}
-
-export default Footer;
+    <footer className='footer-container'>
+      <div className='copyright'>
+        <p>Copyright © 2022 WATERMYPLANTS LLC. All Rights Reserved.</p>
+      </div>
+    </footer>
+  );
+};

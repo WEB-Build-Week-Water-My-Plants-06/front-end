@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
@@ -10,31 +10,30 @@ export default function AddPlantForm() {
     plant_image: '',
     user_id: localStorage.id,
   };
-  const [values, setValues] = useState (initialValues);
+  const [values, setValues] = useState(initialValues);
   const { push } = useHistory();
 
   const handleChange = event => {
-    setValues ({
+    setValues({
       ...values,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleAdd = event => {
-    event.preventDefault ();
-    axiosWithAuth ()
-      .post ('/plants/add', values)
-      .then (resp => {
+    event.preventDefault();
+    axiosWithAuth()
+      .post('/plants/add', values)
+      .then(resp => {
         push('/plants');
       })
-      .catch (err => {
-        console.log ({err});
+      .catch(err => {
+        console.log({err});
       });
   };
 
-  return (
+  return(
     <form className="form-container login-form" onSubmit={handleAdd}>
-
       <div className="form-title">
         <h1>Add A Plant</h1>
       </div>
