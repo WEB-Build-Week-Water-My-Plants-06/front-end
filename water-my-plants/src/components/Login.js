@@ -46,7 +46,7 @@ export default function Login (props) {
 
   const onSubmit = e => {
     e.preventDefault ();
-    login (formValues);
+    login(formValues);
   };
 
   return (

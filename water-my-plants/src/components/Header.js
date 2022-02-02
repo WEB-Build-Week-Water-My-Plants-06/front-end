@@ -7,7 +7,7 @@ export default function Header() {
       <h2>Water My Plants</h2>
         <nav className='nav-links'>
           <Link to='/'>Home</Link>
-          <Link to='/plants'>Plants</Link>
+          <Link to='/login'>Login</Link>
           <Link to='/logout'>Logout</Link>
         </nav>
     </header>

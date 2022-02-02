@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles/App.css';
 import { Switch, Route } from 'react-router-dom';
 
@@ -12,17 +12,22 @@ import Logout from './components/Logout';
 import MyPlantList from './components/MyPlantList';
 
 function App() {
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
   return (
     <div className="App">
         <Header />
-        <Login />
+        {/* <Login /> */}
         <Footer />
-        <SignUp />
+        {/* <SignUp /> */}
         <MyPlantList />
 
       <Switch>
         <PrivateRoute exact path='/logout' component={Logout}/>
-        <Route exact path='/login' component={Login} />
+        <PrivateRoute exact path='/plants' component={MyPlantList} />
+        <Route exact path='/login'>
+          <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        </Route>
         <Route exact path='/signup' component={SignUp} />
         {/* <Route exact path='/' component={Home} /> */}
       </Switch>
