@@ -10,6 +10,7 @@ import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/Logout';
 import MyPlantList from './components/MyPlantList';
+import MyProfile from './components/MyProfile';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
@@ -17,19 +18,16 @@ function App() {
   return (
     <div className="App">
         <Header />
-        {/* <Login /> */}
         <Footer />
-        {/* <SignUp /> */}
-        <MyPlantList />
 
       <Switch>
         <PrivateRoute exact path='/logout' component={Logout}/>
+        <PrivateRoute exact path='/profile' component={MyProfile} />
         <PrivateRoute exact path='/plants' component={MyPlantList} />
         <Route exact path='/login'>
           <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </Route>
         <Route exact path='/signup' component={SignUp} />
-        {/* <Route exact path='/' component={Home} /> */}
       </Switch>
     </div>
   );
