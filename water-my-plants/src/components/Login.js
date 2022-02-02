@@ -9,49 +9,48 @@ const initialFormValues = {
   phone_number: '',
 };
 
-export default function Login (props) {
-  const {setIsLoggedIn} = props;
+export default function Login(props) {
+  const { setIsLoggedIn } = props;
   const [formValues, setFormValues] = useState(initialFormValues);
   const { push } = useHistory();
 
   const login = () => {
     axios
-      .post ('https://water-my-plants-8.herokuapp.com/api/users/login', {
+      .post('https://water-my-plants-8.herokuapp.com/api/users/login', {
         username: formValues.username,
         password: formValues.password,
         phone_number: formValues.phone_number,
       })
-      .then (res => {
-        localStorage.setItem ('username', formValues.username);
-        localStorage.setItem ('token', res.data.token);
-        setIsLoggedIn (true);
+      .then(res => {
+        localStorage.setItem('username', formValues.username);
+        localStorage.setItem('token', res.data.token);
+        setIsLoggedIn(true);
         push('/plants');
 
-        axiosWithAuth ()
-          .get ('/users')
-          .then (res => {
-            localStorage.setItem ('id', res.data.user_id);
-            localStorage.setItem ('phone_number', res.data.phone_number);
+        axiosWithAuth()
+          .get('/users')
+          .then(res => {
+            console.log(res)
+            localStorage.setItem('id', res.data.user_id);
+            localStorage.setItem('phone_number', res.data.phone_number);
           });
       });
   };
 
   const onChange = e => {
-    setFormValues ({
+    setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
-    console.log (e.target.name, e.target.value);
   };
 
   const onSubmit = e => {
-    e.preventDefault ();
+    e.preventDefault();
     login(formValues);
   };
 
   return (
     <form className="form-container login-form" onSubmit={onSubmit}>
-
       <div className="form-title">
         <h1>Login</h1>
       </div>
@@ -85,4 +84,4 @@ export default function Login (props) {
       </div>
     </form>
   );
-}
+};

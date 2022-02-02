@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header(props) {
+  const { token, isLoggedIn, setIsLoggedIn } = props;
+
+  useEffect(() => {
+    token !== null ? setIsLoggedIn(true) : setIsLoggedIn(false)
+  }, [token, setIsLoggedIn]);
+
   return (
-    <header>
-      <h2>Water My Plants</h2>
-        <nav className='nav-links'>
-          <Link className='link' to='/'>Home</Link>
-          <Link className='link' to='/login'>Login</Link>
-          <Link className='link' to='/profile'>My Profile</Link>
-          <Link className='link' to='/plants'>Plant List</Link>
-          <Link className='link' to='/logout'>Logout</Link>
-        </nav>
+    <header className='header-container'>
+      <div className='watermyplants'>
+        <Link to='/'>Water My Plants</Link>
+      </div>
+      <nav className='nav-links'>
+          { !isLoggedIn && <Link to='/login'>Sign In</Link> }
+          { !isLoggedIn && <Link id='register-btn' to='/signup'>Register</Link> }
+          { isLoggedIn && <Link id='myplants-btn' to='/plants'>My Plants</Link> }
+          { isLoggedIn && <Link id='profile-btn' to='/profile'>Account</Link> } 
+          { isLoggedIn && <Link id='add-btn' to='/add'>Add Plant</Link>}
+          { isLoggedIn && <Link id='logout-btn' to='/logout'>Sign Out</Link> }
+      </nav>
     </header>
-  )
-}
+  );
+};

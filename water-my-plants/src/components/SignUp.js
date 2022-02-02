@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import signUpSchema from '../validation/signUpSchema';
@@ -17,44 +17,44 @@ const initialFormErrors = {
   confirm: '',
 };
 
-export default function SignUp () {
-  const [formValues, setFormValues] = useState (initialFormValues);
-  const [formErrors, setFormErrors] = useState (initialFormErrors);
+export default function SignUp() {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   const { push } = useHistory();
 
   const signup = () => {
-    axiosWithAuth().post('/users/register', {
-      "username": formValues.username,
-      "password": formValues.password,
-      "phone_number": formValues.phone_number
-    })
-    .then(res => {
-      console.log(res);
-      push('/login');
-    })
-    .catch(err => {
-      console.log({err});
-    })
+    axios
+      .post('https://water-my-plants-8.herokuapp.com/api/users/register', {
+        username: formValues.username,
+        password: formValues.password,
+        phone_number: formValues.phone_number
+      })
+      .then(res => {
+        push('/login');
+      })
+      .catch(err => {
+        console.log({err});
+      })
   }
 
   const validate = (name, value) => {
     yup
-      .reach (signUpSchema, name)
-      .validate (value)
-      .then (() => setFormErrors ({...formErrors, [name]: ''}))
-      .catch (err => setFormErrors ({...formErrors, [name]: err.errors[0]}));
+      .reach(signUpSchema, name)
+      .validate(value)
+      .then(() => setFormErrors({...formErrors, [name]: ''}))
+      .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}));
   };
 
   const onChange = e => {
-    validate (e.target.name, e.target.value);
-    setFormValues ({
+    validate(e.target.name, e.target.value);
+    setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
   };
 
   const onSubmit = e => {
-    e.preventDefault ();
+    e.preventDefault();
     signup();
   };
 
@@ -71,7 +71,7 @@ export default function SignUp () {
       </div>
       <div className="formGroup">
         <div className="first-name-input form-spacing">
-          <label>First Name:&nbsp;</label>
+          <label>First Name: </label>
             <input
               name="first-name"
               type="text"
@@ -79,7 +79,7 @@ export default function SignUp () {
         </div>
 
         <div className="last-name-input form-spacing">
-          <label>Last Name:&nbsp;</label>
+          <label>Last Name: </label>
             <input
               name="last-name"
               type="text"
@@ -87,7 +87,7 @@ export default function SignUp () {
         </div>
 
         <div className="username-input form-spacing">
-          <label>Username:&nbsp;</label>
+          <label>Username: </label>
             <input
               name="username"
               type="text"
@@ -97,7 +97,7 @@ export default function SignUp () {
         </div>
 
         <div className="email-input form-spacing">
-          <label>Phone Number:&nbsp;</label>
+          <label>Phone Number: </label>
             <input
               name="phone_number"
               type="text"
@@ -107,7 +107,7 @@ export default function SignUp () {
         </div>
 
         <div className="password-input form-spacing">
-          <label>Password:&nbsp;</label>
+          <label>Password: </label>
           <input
             name="password"
             type="password"
@@ -117,7 +117,7 @@ export default function SignUp () {
         </div>
 
         <div className="confirm-input form-spacing">
-          <label>Confirm Password:&nbsp;</label>
+          <label>Confirm Password: </label>
           <input
             name="confirm"
             type="password"

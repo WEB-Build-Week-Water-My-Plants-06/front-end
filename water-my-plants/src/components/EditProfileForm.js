@@ -1,37 +1,37 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-export default function EditProfile () {
+export default function EditProfile() {
   const user = {
-    username: localStorage.getItem ('username'),
-    phone_number: localStorage.getItem ('phone_number'),
+    username: localStorage.getItem('username'),
+    phone_number: localStorage.getItem('phone_number'),
     password: '',
   };
-  const [formValues, setFormValues] = useState (user);
-  const id = localStorage.getItem ('id');
+  const [formValues, setFormValues] = useState(user);
+  const id = localStorage.getItem('id');
 
   const onSubmit = e => {
-    e.preventDefault ();
-    edit ();
+    e.preventDefault();
+    edit();
   };
 
   const onChange = e => {
-    setFormValues ({
+    setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
   };
 
   const edit = () => {
-    axiosWithAuth ()
-      .put (`/users/${id}`, formValues)
-      .then (res => {
-        localStorage.setItem ('phone_number', res.data.phone_number);
-        localStorage.setItem ('username', res.data.username);
-        localStorage.setItem ('id', res.data.user_id);
+    axiosWithAuth()
+      .put(`/users/${id}`, formValues)
+      .then(res => {
+        localStorage.setItem('phone_number', res.data.phone_number);
+        localStorage.setItem('username', res.data.username);
+        localStorage.setItem('id', res.data.user_id);
       })
-      .catch (err => {
-        console.log (err);
+      .catch(err => {
+        console.log({err});
       });
   };
 
@@ -104,7 +104,6 @@ export default function EditProfile () {
           </div>
         </form>
       </div>
-
     </div>
   );
 };

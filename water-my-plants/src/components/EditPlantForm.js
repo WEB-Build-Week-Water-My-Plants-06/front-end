@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 export default function EditPlantForm(props) {
-  const {plant, handleUpdatePlant, formToggle, setFormToggle} = props;
-  const [formValues, setFormValues] = useState (plant);
+  const { plant, handleUpdatePlant, formToggle, setFormToggle } = props;
+  const [formValues, setFormValues] = useState(plant);
 
   const onChange = event => {
-    setFormValues ({
+    setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = event => {
-    event.preventDefault ();
-    handleUpdatePlant (formValues);
-    setFormToggle (!formToggle);
+    event.preventDefault();
+    handleUpdatePlant(formValues);
+    setFormToggle(!formToggle);
   };
 
   return (
@@ -69,7 +69,7 @@ export default function EditPlantForm(props) {
             <button
               id="cancel"
               onClick={() => {
-                setFormToggle (!formToggle);
+                setFormToggle(!formToggle);
               }}
             >
               cancel
