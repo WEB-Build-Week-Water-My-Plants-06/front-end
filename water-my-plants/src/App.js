@@ -10,6 +10,7 @@ import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/Logout';
 import MyPlantList from './components/MyPlantList';
+import MyProfile from './components/MyProfile';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Footer />
         <SignUp />
         <MyPlantList />
+        <MyProfile />
 
       <Switch>
         <PrivateRoute exact path='/logout' component={Logout}/>
