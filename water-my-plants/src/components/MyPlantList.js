@@ -60,8 +60,8 @@ export default function MyPlantList() {
 
         <div id="add-plant-item">
           <a href="/add">
-            <h2>+</h2>
-            <p>Add Plant</p>
+            <h2 className='add'>+</h2>
+            <p className='add'>Add Plant</p>
           </a>
         </div>
       </div>

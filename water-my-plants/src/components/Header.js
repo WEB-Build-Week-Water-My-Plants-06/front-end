@@ -11,15 +11,15 @@ export default function Header(props) {
   return (
     <header className='header-container'>
       <div className='watermyplants'>
-        <Link to='/'>Water My Plants</Link>
+        <Link className='link' to='/'>Home</Link>
       </div>
       <nav className='nav-links'>
-          { !isLoggedIn && <Link to='/login'>Sign In</Link> }
-          { !isLoggedIn && <Link id='register-btn' to='/signup'>Register</Link> }
-          { isLoggedIn && <Link id='myplants-btn' to='/plants'>My Plants</Link> }
-          { isLoggedIn && <Link id='profile-btn' to='/profile'>Account</Link> } 
-          { isLoggedIn && <Link id='add-btn' to='/add'>Add Plant</Link>}
-          { isLoggedIn && <Link id='logout-btn' to='/logout'>Sign Out</Link> }
+          { !isLoggedIn && <Link className='link' to='/login'>Sign In</Link> }
+          { !isLoggedIn && <Link className='link' id='register-btn' to='/signup'>Register</Link> }
+          { isLoggedIn && <Link className='link' id='myplants-btn' to='/plants'>My Plants</Link> }
+          { isLoggedIn && <Link className='link' id='profile-btn' to='/profile'>Account</Link> } 
+          { isLoggedIn && <Link className='link' id='add-btn' to='/add'>Add Plant</Link>}
+          { isLoggedIn && <Link className='link' id='logout-btn' to='/logout'>Sign Out</Link> }
       </nav>
     </header>
   );

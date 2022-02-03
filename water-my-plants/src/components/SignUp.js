@@ -129,7 +129,7 @@ export default function SignUp() {
         <div className="submit">
           <button id="submit-login">Sign Up</button>
           <p className="reroute">
-            Already have an account? <a href="/login">Login</a>
+            Already have an account? <a href="/login" id='login'>Login</a>
           </p>
         </div>
       </div>
